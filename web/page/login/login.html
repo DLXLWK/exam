@@ -88,7 +88,7 @@ body {
 	}
 	
 	keyframes skyset {
-		0% {
+		10%{
 			background: #ddf5f7;
 		}
 		25% {
@@ -103,7 +103,8 @@ body {
 		100% {
 			background: #ddf5f7;
 		}
-	}
+}
+
 	/*-------- 天黑场景遮罩层以及动画 --------*/
 	
 	.nightOverlay {
@@ -473,7 +474,7 @@ body {
 			transform: rotate(0deg);
 		}
 	}
-}
+
 @keyframes balloon {
 	0% {
 		right: -157px;
@@ -501,7 +502,7 @@ body {
 	}
 }
 
-}
+
 
 /*-------- 场景组件 --------*/
 .skyline {
@@ -622,7 +623,7 @@ body {
 		<div class="layui-form-item input-item" id="imgCode">
 			<label for="code">验证码</label>
 			<input type="text" placeholder="请输入验证码" autocomplete="off" id="code" class="layui-input">
-			<img src="../../images/code.jpg">
+			<img src="/code">
 		</div>
 		<div class="layui-form-item">
 			<button class="layui-btn layui-block" lay-filter="login" lay-submit>登录</button>
