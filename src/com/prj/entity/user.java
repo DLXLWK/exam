@@ -4,7 +4,7 @@ public class user {
     private int id;
     private String uname;
     private int pwd;
-    private String typeclass; 
+    private String typeclass;
     private String url;
 
     public int getId() {
