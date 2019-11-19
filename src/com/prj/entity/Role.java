@@ -1,6 +1,6 @@
 package com.prj.entity;
 
-public class role {
+public class Role {
     private int id;
     private String rname;
 

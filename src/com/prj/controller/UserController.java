@@ -1,7 +1,9 @@
 package com.prj.controller;
 
+import com.prj.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +21,23 @@ public class UserController {
             'K',   '9' ,'L', '1','M',  '2','N',  'P', '3', 'Q', '4', 'R', 'S', 'T', 'U', 'V', 'W',
             'X', 'Y', 'Z'};
 
+
+    String strCode="";
+
+
+    //登录
+    @ResponseBody
+    @RequestMapping("/login")
+    public String login(User user, HttpSession session, String yzm){
+
+        if(user.getUname().equals("admin") && user.getPwd().equals("123") && strCode.equals(yzm)){
+
+            session.setAttribute("loginUser",user);
+
+            return "ok";
+        }
+        return "error";
+    }
 
     //验证码
     @RequestMapping("/code")
@@ -59,7 +78,9 @@ public class UserController {
             g.drawString(rand, 13*i+6, 28);
         }
         //将字符保存到session中用于前端的验证
-        session.setAttribute("authCode", strCode.toLowerCase());
+
+        //给验证码赋值
+        this.strCode=strCode;
         g.dispose();
 
         ImageIO.write(image, "JPEG", response.getOutputStream());

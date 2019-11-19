@@ -1,6 +1,6 @@
 package com.prj.entity;
 
-public class menu {
+public class Menu {
     private int id;
     private String title;
     private String author;

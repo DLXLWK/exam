@@ -1,6 +1,6 @@
 package com.prj.entity;
 
-public class exam {
+public class Exam {
     private int id;
     private String title;
     private String info;

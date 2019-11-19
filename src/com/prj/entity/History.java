@@ -1,6 +1,6 @@
 package com.prj.entity;
 
-public class history {
+public class History {
     private int id;
     private int uid;
     private int mid;
