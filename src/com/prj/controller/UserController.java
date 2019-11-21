@@ -43,7 +43,7 @@ public class UserController {
     @RequestMapping("/code")
     public void getCode(HttpServletResponse response, HttpSession session) throws IOException {
         int width = 63;
-        int height = 37;
+        int height = 37; 
         Random random = new Random();
         //设置response头信息
         //禁止缓存
