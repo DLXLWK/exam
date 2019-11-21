@@ -24,11 +24,11 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             {field: 'newsStatus', title: '发布状态',  align:'center',templet:"#newsStatus"},
             {field: 'newsLook', title: '浏览权限', align:'center'},
             {field: 'newsTop', title: '是否置顶', align:'center', templet:function(d){
-                return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否" '+d.newsTop+'>'
-            }},
+                    return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否" '+d.newsTop+'>'
+                }},
             {field: 'newsTime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
-                return d.newsTime.substring(0,10);
-            }},
+                    return d.newsTime.substring(0,10);
+                }},
             {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -62,7 +62,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         }
     });
 
-    //添加
+    //添加试题
     function addNews(edit){
         var index = layui.layer.open({
             title : "添加试题",
@@ -131,8 +131,8 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                 // $.get("删除文章接口",{
                 //     newsId : data.newsId  //将需要删除的newsId作为参数传入
                 // },function(data){
-                    tableIns.reload();
-                    layer.close(index);
+                tableIns.reload();
+                layer.close(index);
                 // })
             });
         } else if(layEvent === 'look'){ //预览

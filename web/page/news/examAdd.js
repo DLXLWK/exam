@@ -1,6 +1,6 @@
 layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
     var form = layui.form
-        layer = parent.layer === undefined ? layui.layer : top.layer,
+    layer = parent.layer === undefined ? layui.layer : top.layer,
         laypage = layui.laypage,
         upload = layui.upload,
         layedit = layui.layedit,
@@ -8,7 +8,9 @@ layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
         transfer = layui.transfer,
         $ = layui.jquery;
 
+    //用于同步编辑器内容到textarea
     layedit.sync(editIndex);
+
 
     //模拟班级数据
     var data1 = [
@@ -17,22 +19,25 @@ layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
         ,{"value": "3", "title": "动漫1804"}
         ,{"value": "4", "title": "新闻1801"}
     ]
-    //用于同步编辑器内容到textarea
+
+    //加载穿梭框
+    //基础效果
     transfer.render({
         elem: '#test1',
         title:["班级列表","选择考试班级"]
         ,data: data1
     })
 
-	 //拖拽上传
-	  upload.render({
-	    elem: '#test10'
-	    ,url: '/upload/'
-	    ,exts: 'xls|xlsx' //只允许上传Excel文件
-	    ,done: function(res){
-	      console.log(res)
-	    }
-	  });
+
+    //拖拽上传
+    upload.render({
+        elem: '#test10'
+        ,url: '/upload/'
+        ,exts: 'xls|xlsx' //只允许上传Excel文件
+        ,done: function(res){
+            console.log(res)
+        }
+    });
 
 
     //上传缩略图
