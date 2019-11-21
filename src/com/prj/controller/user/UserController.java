@@ -1,6 +1,9 @@
-package com.prj.controller;
+package com.prj.controller.user;
 
 import com.prj.entity.User;
+import com.prj.server.user.UserServer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,13 +27,24 @@ public class UserController {
 
     String strCode="";
 
+    @Autowired
+    @Qualifier("UserServerImpl")
+    private UserServer userServer;
+
+    public UserServer getUserServer() {
+        return userServer;
+    }
+
+    public void setUserServer(UserServer userServer) {
+        this.userServer = userServer;
+    }
 
     //登录
     @ResponseBody
     @RequestMapping("/login")
-    public String login(User user, HttpSession session, String yzm){
 
-        if(user.getUname().equals("admin") && user.getPwd().equals("123") && strCode.equals(yzm)){
+    public String login(User user, HttpSession session, String yzm , String uname){
+        if(user.getUname().equals(userServer.queryUser(uname)) && user.getPwd().equals("123") && strCode.equals(yzm)){
 
             session.setAttribute("loginUser",user);
 
@@ -43,7 +57,7 @@ public class UserController {
     @RequestMapping("/code")
     public void getCode(HttpServletResponse response, HttpSession session) throws IOException {
         int width = 63;
-        int height = 37; 
+        int height = 37;
         Random random = new Random();
         //设置response头信息
         //禁止缓存

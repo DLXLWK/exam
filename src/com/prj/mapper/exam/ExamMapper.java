@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ExamMapper {
 
+
     public List<Exam> query( @Param("mid") int mid);
 
 }
