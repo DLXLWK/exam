@@ -44,7 +44,7 @@ public class UserController {
     @RequestMapping("/login")
 
     public String login(User user, HttpSession session, String yzm , String uname){
-        if(user.getUname().equals(userServer.queryUser(uname)) && user.getPwd().equals("123") && strCode.equals(yzm)){
+        if(user.getUname().equals(uname) && user.getPwd().equals("123") && strCode.equals(yzm)){
 
             session.setAttribute("loginUser",user);
 
