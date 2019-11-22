@@ -1,13 +1,13 @@
 package com.prj.mapper.user;
 
-import com.prj.entity.Exam;
+import com.prj.entity.Classes;
 import com.prj.entity.User;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 public interface UserMapper {
-    public List<User> queryUser(String uname);
-
+    //查用户
+    public List<User> queryUser(String uname,String pwd);
+    //查班
+    public List<Classes> queryClasses(Classes classes);
 
 }

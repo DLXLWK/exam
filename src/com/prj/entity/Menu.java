@@ -1,7 +1,8 @@
 package com.prj.entity;
 
 public class Menu {
-    private int id;
+
+    private long id;
     private String title;
     private String author;
     private String status;
@@ -11,14 +12,14 @@ public class Menu {
     private String ispublic;
     private String istop;
 
-    public int getId() {
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
-
     public String getTitle() {
         return title;
     }

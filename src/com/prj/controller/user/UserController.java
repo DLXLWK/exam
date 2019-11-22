@@ -1,5 +1,6 @@
 package com.prj.controller.user;
 
+import com.prj.entity.Classes;
 import com.prj.entity.User;
 import com.prj.server.user.UserServer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,15 +43,20 @@ public class UserController {
     //登录
     @ResponseBody
     @RequestMapping("/login")
-
-    public String login(User user, HttpSession session, String yzm , String uname){
-        if(user.getUname().equals(uname) && user.getPwd().equals("123") && strCode.equals(yzm)){
+    public String login(User user, HttpSession session, String yzm , String uname,String pwd){
+        if(user.getUname().equals(uname) && user.getPwd().equals(pwd) && strCode.equals(yzm)){
 
             session.setAttribute("loginUser",user);
 
             return "ok";
         }
         return "error";
+    }
+    @RequestMapping("/query")
+    public String query(HttpSession session, Classes classes){
+        session.setAttribute("classes",classes);
+
+        return "ok";
     }
 
     //验证码

@@ -1,4 +1,5 @@
-layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
+
+layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],function(){
     var form = layui.form
     layer = parent.layer === undefined ? layui.layer : top.layer,
         laypage = layui.laypage,
@@ -12,20 +13,28 @@ layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
     layedit.sync(editIndex);
 
 
-    //模拟班级数据
+    //班级数据
     var data1 = [
+
+
         {"value": "1", "title": "软件1805"}
         ,{"value": "2", "title": "软件1804"}
-        ,{"value": "3", "title": "动漫1804"}
-        ,{"value": "4", "title": "新闻1801"}
+        ,{"value": "3", "title": "软件1803"}
+        ,{"value": "4", "title": "软件1802"}
+        ,{"value": "5", "title": "软件1801"}
+        ,{"value": "6", "title": "动漫1803"}
+        ,{"value": "7", "title": "动漫1802"}
+        ,{"value": "8", "title": "动漫1801"}
+        ,{"value": "9", "title": "新闻1802"}
+        ,{"value": "10", "title": "新闻1801"}
     ]
-
     //加载穿梭框
     //基础效果
     transfer.render({
         elem: '#test1',
         title:["班级列表","选择考试班级"]
         ,data: data1
+        ,id: 'classid'
     })
 
 
@@ -33,6 +42,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
     upload.render({
         elem: '#test10'
         ,url: '/upload/'
+        ,field:"url"
         ,exts: 'xls|xlsx' //只允许上传Excel文件
         ,done: function(res){
             console.log(res)
@@ -40,17 +50,6 @@ layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
     });
 
 
-    //上传缩略图
-    /*upload.render({
-        elem: '.thumbBox',
-        url: '../../json/userface.json',
-        method : "get",  //此处是为了演示之用，实际使用中请将此删除，默认用post方式提交
-        done: function(res, index, upload){
-            var num = parseInt(4*Math.random());  //生成0-4的随机数，随机显示一个头像信息
-            $('.thumbImg').attr('src',res.data[num].src);
-            $('.thumbBox').css("background","#fff");
-        }
-    });*/
 
     //格式化时间
     function filterTime(val){
@@ -96,22 +95,33 @@ layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
     })
     form.on("submit(addNews)",function(data){
         //截取文章内容中的一部分文字放入文章摘要
-        var abstract = layedit.getText(editIndex).substring(0,50);
+        //var abstract = layedit.getText(editIndex).substring(0,50);
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        // 实际使用时的提交信息
-        // $.post("上传路径",{
-        //     newsName : $(".newsName").val(),  //文章标题
-        //     abstract : $(".abstract").val(),  //文章摘要
-        //     content : layedit.getContent(editIndex).split('<audio controls="controls" style="display: none;"></audio>')[0],  //文章内容
-        //     newsImg : $(".thumbImg").attr("src"),  //缩略图
-        //     classify : '1',    //文章分类
-        //     newsStatus : $('.newsStatus select').val(),    //发布状态
-        //     newsTime : submitTime,    //发布时间
-        //     newsTop : data.filed.newsTop == "on" ? "checked" : "",    //是否置顶
-        // },function(res){
-        //
-        // })
+        //获得穿梭框右侧数据
+        var classid = transfer.getData('classid');
+        var ids=[];
+
+        for(var i=0;i<classid.length;i++){
+            ids.push({"id":classid[i].value});
+        }
+
+        $.ajax({
+            url:"/addMenu",
+            type: 'post',//提交请求的类型
+            data:JSON.stringify({"menu":data.field,"classesList":ids}),//数据
+            dataType: 'json',//提交后台参数的类型
+            contentType:"application/json",//定义数据格式是json
+            success:function (data){
+                if(data=='ok'){
+                    layer.msg('添加成功');
+                }else if(data=='error'){
+                    layer.msg('添加失败');
+                }
+            }
+        })
+
+
         setTimeout(function(){
             top.layer.close(index);
             top.layer.msg("文章添加成功！");

@@ -1,5 +1,6 @@
 package com.prj.server.user;
 
+import com.prj.entity.Classes;
 import com.prj.entity.User;
 import com.prj.mapper.user.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,12 @@ public class UserServerImpl implements UserServer {
 
 
     @Override
-    public List<User> queryUser(String uname) {
-        return userMapper.queryUser(uname);
+    public List<User> queryUser(String uname ,String pwd) {
+        return userMapper.queryUser(uname,pwd);
+    }
+
+    @Override
+    public List<Classes> queryClasses(Classes classes) {
+        return userMapper.queryClasses(classes);
     }
 }
