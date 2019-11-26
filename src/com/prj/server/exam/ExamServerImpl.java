@@ -20,7 +20,12 @@ public class ExamServerImpl implements ExamServer {
 
 
     @Override
-    public List<Exam> query(int mid) {
+    public List<Exam> query(long mid) {
         return examMapper.query(mid);
+    }
+
+    @Override
+    public int add(Exam exam) {
+        return examMapper.add(exam);
     }
 }

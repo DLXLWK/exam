@@ -40,7 +40,7 @@
 			<label class="layui-form-label">试题上传</label>
 			<div class="layui-input-block">
 				<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-					<legend>拖拽上传</legend>
+					<legend>拖拽上传&nbsp;<a href="/page/模板.xlsx">试题模板</a></legend>
 				</fieldset>
 
 				<div class="layui-upload-drag" id="test10">
@@ -48,6 +48,24 @@
 					<p>点击上传，或将文件拖拽到此处</p>
 				</div>
 				<!--<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="news_content"></textarea>-->
+			</div>
+
+			<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+				<legend>文件</legend>
+			</fieldset>
+
+			<div class="layui-upload"  lay-verify="fileName">
+				<div class="layui-upload-list">
+					<table class="layui-table">
+						<thead>
+						<tr><th>文件名</th>
+							<th>大小</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr></thead>
+						<tbody id="demoList"></tbody>
+					</table>
+				</div>
 			</div>
 
 			<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
@@ -106,8 +124,7 @@
 			</div>
 			<hr class="layui-bg-gray" />
 			<div class="layui-right">
-				<a class="layui-btn layui-btn-sm" lay-filter="addNews" lay-submit><i class="layui-icon">&#xe609;</i>发布</a>
-				<!--<a class="layui-btn layui-btn-primary layui-btn-sm" lay-filter="look" lay-submit>预览</a>-->
+				<button id="test9" class="layui-btn layui-btn-sm" lay-filter="addNews" lay-submit><i class="layui-icon">&#xe609;</i>发布</button>				<!--<a class="layui-btn layui-btn-primary layui-btn-sm" lay-filter="look" lay-submit>预览</a>-->
 			</div>
 		</div>
 	</div>

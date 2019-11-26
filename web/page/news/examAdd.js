@@ -1,5 +1,5 @@
 
-layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],function(){
+layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','element'],function(){
     var form = layui.form
     layer = parent.layer === undefined ? layui.layer : top.layer,
         laypage = layui.laypage,
@@ -7,10 +7,14 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],func
         layedit = layui.layedit,
         laydate = layui.laydate,
         transfer = layui.transfer,
+        element=layui.element,
         $ = layui.jquery;
 
     //用于同步编辑器内容到textarea
     layedit.sync(editIndex);
+
+    //文件对象
+    var fileObj;
 
 
     //班级数据
@@ -39,13 +43,47 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],func
 
 
     //拖拽上传
+    var demoListView = $('#demoList');
+    var tr;
     upload.render({
         elem: '#test10'
         ,url: '/upload/'
         ,field:"url"
         ,exts: 'xls|xlsx' //只允许上传Excel文件
-        ,done: function(res){
-            console.log(res)
+        ,done: function(res, index, upload){
+            if(res.code==200){
+                layer.msg('上传成功');
+            }
+        },
+        choose: function(obj) {
+            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            //读取本地文件
+
+            obj.preview(function (index, file, result) {
+
+                if($('#uploadid').length>=1){
+                    delete files[index]; //删除对应的文件
+                    tr.remove();
+                }
+
+                tr = $(['<tr id="uploadid">'
+                    , '<td>' + file.name + '</td>'
+                    , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                    , '<td>上传成功</td>'
+                    , '<td>'
+                    , '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                    , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                    , '</td>'
+                    , '</tr>'].join(''));
+
+                //删除
+                tr.find('.demo-delete').on('click', function () {
+                    delete files[index]; //删除对应的文件
+                    tr.remove();
+                });
+
+                demoListView.append(tr);
+            });
         }
     });
 
@@ -84,12 +122,22 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],func
     form.verify({
         newsName : function(val){
             if(val == ''){
-                return "文章标题不能为空";
+                return "试题名称不能为空";
             }
         },
         content : function(val){
             if(val == ''){
-                return "文章内容不能为空";
+                return "试题说明不能为空";
+            }
+        },
+        fileName : function(val){
+            if($('#uploadid').length<1){
+                return "文件不能为空";
+            }
+        },
+        transferId : function(val){
+            if(transfer.getData('classid').length<=0){
+                return "考试班级不能为空";
             }
         }
     })
@@ -105,6 +153,8 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],func
         for(var i=0;i<classid.length;i++){
             ids.push({"id":classid[i].value});
         }
+
+        delete data.field.myfile;
 
         $.ajax({
             url:"/addMenu",

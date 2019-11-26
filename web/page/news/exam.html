@@ -191,6 +191,18 @@
     })
 
 
+    //表单提交
+    form.on("submit()",function (datalayui){
+        layer.confirm('确定交卷？', {
+            btn: ['确定', '取消'] //可以无限个按钮
+        }, function(index, layero){
+            parent.location.reload();
+        }, function(index){
+
+        });
+        return false;
+    })
+
 
 
 

@@ -6,5 +6,10 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface ExamServer {
-    public List<Exam> query(@Param("mid") int mid);
+
+    public List<Exam> query( @Param("mid") long mid);
+
+    //添加试题信息
+    public int add(Exam exam);
+
 }

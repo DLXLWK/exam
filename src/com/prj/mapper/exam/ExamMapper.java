@@ -8,6 +8,8 @@ import java.util.List;
 public interface ExamMapper {
 
 
-    public List<Exam> query( @Param("mid") int mid);
+    public List<Exam> query( @Param("mid") long mid);
 
+    //添加试题信息
+    public int add(Exam exam);
 }
