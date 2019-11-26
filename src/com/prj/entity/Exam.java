@@ -4,7 +4,7 @@ public class Exam {
     private int id;
     private String title;
     private String info;
-    private int answer;
+    private String  answer;
     private int mid;
     private Menu menu;
     private int imgUrl;
@@ -33,11 +33,11 @@ public class Exam {
         this.info = info;
     }
 
-    public int getAnswer() {
+    public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(int answer) {
+    public void setAnswer(String answer) {
         this.answer = answer;
     }
 

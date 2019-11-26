@@ -36,8 +36,8 @@ public class MenuController {
 
     @ResponseBody
     @RequestMapping("/addMenu")
-    public String addMenu(@RequestBody ClassmenuVO classmenu){
-       int i= menuServer.addMenu(classmenu);
+    public String addMenu(@RequestBody ClassmenuVO classmenu)throws Exception{
+       int i= menuServer.addMenu(classmenu,lastFile);
 
        if(i>0){
            return "ok";
