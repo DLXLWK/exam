@@ -6,6 +6,7 @@ public class Exam {
     private String info;
     private int answer;
     private int mid;
+    private Menu menu;
     private int imgUrl;
 
     public int getId() {
@@ -46,6 +47,14 @@ public class Exam {
 
     public void setMid(int mid) {
         this.mid = mid;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 
     public int getImgUrl() {

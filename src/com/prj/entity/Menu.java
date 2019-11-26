@@ -1,16 +1,18 @@
 package com.prj.entity;
-
 public class Menu {
 
     private long id;
     private String title;
     private String author;
-    private String status;
-    private String url;
+    private int status;
+    private String url;//文件上传路径
     private String type;
-    private String opentime;
-    private String ispublic;
-    private String istop;
+    private java.sql.Timestamp opentime;
+    private int ispublic;
+    private int istop;
+    private int scoreTime;
+    private int sumScore;
+
 
 
     public long getId() {
@@ -20,6 +22,8 @@ public class Menu {
     public void setId(long id) {
         this.id = id;
     }
+
+
     public String getTitle() {
         return title;
     }
@@ -27,6 +31,7 @@ public class Menu {
     public void setTitle(String title) {
         this.title = title;
     }
+
 
     public String getAuthor() {
         return author;
@@ -36,13 +41,15 @@ public class Menu {
         this.author = author;
     }
 
-    public String getStatus() {
+
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
 
     public String getUrl() {
         return url;
@@ -52,6 +59,7 @@ public class Menu {
         this.url = url;
     }
 
+
     public String getType() {
         return type;
     }
@@ -60,27 +68,49 @@ public class Menu {
         this.type = type;
     }
 
-    public String getOpentime() {
+
+    public java.sql.Timestamp getOpentime() {
         return opentime;
     }
 
-    public void setOpentime(String opentime) {
+    public void setOpentime(java.sql.Timestamp opentime) {
         this.opentime = opentime;
     }
 
-    public String getIspublic() {
+
+    public int getIspublic() {
         return ispublic;
     }
 
-    public void setIspublic(String ispublic) {
+    public void setIspublic(int ispublic) {
         this.ispublic = ispublic;
     }
 
-    public String getIstop() {
+
+    public int getIstop() {
         return istop;
     }
 
-    public void setIstop(String istop) {
+    public void setIstop(int istop) {
         this.istop = istop;
     }
+
+
+    public int getScoreTime() {
+        return scoreTime;
+    }
+
+    public void setScoreTime(int scoreTime) {
+        this.scoreTime = scoreTime;
+    }
+
+
+    public int getSumScore() {
+        return sumScore;
+    }
+
+    public void setSumScore(int sumScore) {
+        this.sumScore = sumScore;
+    }
+
 }
