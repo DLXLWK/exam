@@ -43,14 +43,14 @@ public class UserController {
     //登录
     @ResponseBody
     @RequestMapping("/login")
-    public String login(User user, HttpSession session, String yzm , String uname,String pwd){
-        if(user.getUname().equals(uname) && user.getPwd().equals(pwd) && strCode.equals(yzm)){
-
-            session.setAttribute("loginUser",user);
-
+    public String login(User user, HttpSession session, String yzm ){
+        User login= userServer.login(user);
+        if (login!=null && yzm.equals(strCode)){
+            session.setAttribute("loginUser",login);
             return "ok";
         }
-        return "error";
+
+        return "loginError";
     }
     @RequestMapping("/query")
     public String query(HttpSession session, Classes classes){

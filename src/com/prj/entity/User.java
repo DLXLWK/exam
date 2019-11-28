@@ -3,18 +3,9 @@ package com.prj.entity;
 public class User {
     private int id;
     private String uname;
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
     private String pwd;
-    private String typeclass;
-    private String url;
+    private Role role;
+    private Classes classes;
 
     public int getId() {
         return id;
@@ -22,6 +13,22 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getUname() {
@@ -32,21 +39,11 @@ public class User {
         this.uname = uname;
     }
 
-
-
-    public String getTypeclass() {
-        return typeclass;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setTypeclass(String typeclass) {
-        this.typeclass = typeclass;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 }

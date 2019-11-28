@@ -23,7 +23,7 @@ layui.use(['form','layer','jquery'],function(){
                     if(data=='ok'){
                         layer.msg('登录成功');
                         window.location.href = "../../index.jsp";
-                    }else if(data=='error'){
+                    }else if(data=='loginError'){
 
                         datalayui.elem.innerText="登录";
                         datalayui.elem.removeAttribute("disabled");

@@ -1,58 +1,77 @@
 package com.prj.entity;
 
+
 public class Result {
-    private int id;
-    private int uid;
-    private String title;
-    private String result;
-    private int mid;
-    private String info;
 
-    public int getId() {
-        return id;
-    }
+  private int id;
+  private int uid;
+  private String title;
+  private int result;
+  private String time;
+  private int mid;
+  private String info;
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    public int getUid() {
-        return uid;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public int getUid() {
+    return uid;
+  }
 
-    public String getResult() {
-        return result;
-    }
+  public void setUid(int uid) {
+    this.uid = uid;
+  }
 
-    public void setResult(String result) {
-        this.result = result;
-    }
 
-    public int getMid() {
-        return mid;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public void setMid(int mid) {
-        this.mid = mid;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public String getInfo() {
-        return info;
-    }
 
-    public void setInfo(String info) {
-        this.info = info;
-    }
+  public int getResult() {
+    return result;
+  }
+
+  public void setResult(int result) {
+    this.result = result;
+  }
+
+
+  public String getTime() {
+    return time;
+  }
+
+  public void setTime(String time) {
+    this.time = time;
+  }
+
+
+  public int getMid() {
+    return mid;
+  }
+
+  public void setMid(int mid) {
+    this.mid = mid;
+  }
+
+
+  public String getInfo() {
+    return info;
+  }
+
+  public void setInfo(String info) {
+    this.info = info;
+  }
+
 }
