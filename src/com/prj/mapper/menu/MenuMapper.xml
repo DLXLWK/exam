@@ -31,4 +31,8 @@
         SELECT m.id,m.title,u.uname,m.ispublic,m.istop,m.opentime,u.id uid FROM `menu` m,USER u WHERE m.author=u.id ORDER BY m.istop DESC
     </select>
 
+    <update id="updateIsTop">
+        UPDATE `menu` SET istop=#{istop} WHERE id=#{id}
+    </update>
+
 </mapper>
