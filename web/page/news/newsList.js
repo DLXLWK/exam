@@ -71,10 +71,10 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         if($(".searchVal").val() != ''){
             table.reload("newsListTable",{
                 page: {
-                    curr: 1 //重新从第 1 页开始
+                    curr: 1
                 },
                 where: {
-                    key: $(".searchVal").val()  //搜索的关键字
+                    key: $(".searchVal").val() 
                 }
             })
         }else{
@@ -108,7 +108,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             }
         })
         layui.layer.full(index);
-        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+
         $(window).on("resize",function(){
             layui.layer.full(index);
         })
