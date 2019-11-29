@@ -129,8 +129,8 @@
 <script type="text/javascript" src="js/cache.js"></script>
 <script>
     //保存用户登录信息
+
     sessionStorage.setItem("uname","${loginUser.uname}")
-    
 
 </script>
 </body>

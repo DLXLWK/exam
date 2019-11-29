@@ -9,7 +9,7 @@ public class Menu {
 
   private long id;
   private String title;
-  private String author;
+  private User author;
   private int status;
   private String url;//文件上传路径
   private String type;
@@ -39,14 +39,13 @@ public class Menu {
   }
 
 
-  public String getAuthor() {
+  public User getAuthor() {
     return author;
   }
 
-  public void setAuthor(String author) {
+  public void setAuthor(User author) {
     this.author = author;
   }
-
 
   public int getStatus() {
     return status;

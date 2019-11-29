@@ -34,14 +34,26 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     });
 
     //是否置顶
-    form.on('switch(newsTop)', function(data){
+    form.on('row', function(obj){
+
+        var data=obj.data;
         var index = layer.msg('修改中，请稍候',{icon: 16,time:false,shade:0.8});
         setTimeout(function(){
             layer.close(index);
-            if(data.elem.checked){
+
+            if(data.istop==0) {
                 layer.msg("置顶成功！");
-            }else{
-                layer.msg("取消置顶成功！");
+                $.ajax({
+                    url: "/updateIsTop/" + data.id + "/" + data.istop,
+                    success: function (data) {
+                        if (data == "ok") {
+                            layer.msg("修改成功！");
+                        } else {
+                            layer.msg("修改失败！");
+                        }
+                    }
+                })
+
             }
         },500);
     })

@@ -48,7 +48,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
     upload.render({
         elem: '#test10'
         ,url: '/upload/'
-        ,field:"url"
+        ,field:"myfile"
         ,exts: 'xls|xlsx' //只允许上传Excel文件
         ,done: function(res, index, upload){
             if(res.code==200){
@@ -150,6 +150,11 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         var classid = transfer.getData('classid');
         var ids=[];
 
+
+        if(data.field.istop==undefined){
+            data.field.istop=0;
+        }
+
         for(var i=0;i<classid.length;i++){
             ids.push({"id":classid[i].value});
         }
@@ -174,7 +179,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
 
         setTimeout(function(){
             top.layer.close(index);
-            top.layer.msg("文章添加成功！");
+            top.layer.msg("试题添加成功！");
             layer.closeAll("iframe");
             //刷新父页面
             parent.location.reload();
