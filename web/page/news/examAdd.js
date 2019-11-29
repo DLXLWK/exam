@@ -21,7 +21,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
     var data1 = [
 
 
-        {"value": "1", "title": "软件1805"}
+        {"value": "1", "title": "软件1805 "}
         ,{"value": "2", "title": "软件1804"}
         ,{"value": "3", "title": "软件1803"}
         ,{"value": "4", "title": "软件1802"}
