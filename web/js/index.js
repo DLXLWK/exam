@@ -18,6 +18,18 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	function getData(json){
 		$.getJSON(tab.tabConfig.url,function(data){
 			if(json == "contentManagement"){
+
+                /*var contentManagement=[];
+
+                //管理员
+                if(sessionStorage.getItem("userRid")==1){
+                    contentManagement=data.contentManagement;
+                }
+                //学生
+                if(sessionStorage.getItem("userRid")==2){
+                    contentManagement.push(data.contentManagement[2]);
+                }
+*/
 				dataStr = data.contentManagement;
 				//重新渲染左侧菜单
 				tab.render();

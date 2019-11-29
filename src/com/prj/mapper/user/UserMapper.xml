@@ -21,7 +21,7 @@
     </resultMap>
 
     <select id="login"  resultMap="userMap" parameterType="User">
-    SELECT u.* FROM USER u,role r,classes c WHERE u.rid=r.id AND u.typeclass=c.id AND uname=#{uname} AND pwd=#{pwd}
+    SELECT u.*  FROM USER u,role r,classes c WHERE u.rid=r.id AND u.typeclass=c.id AND uname=#{uname} AND pwd=#{pwd}
     </select>
 
 </mapper>
