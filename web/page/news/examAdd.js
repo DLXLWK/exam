@@ -47,8 +47,8 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
     var tr;
     upload.render({
         elem: '#test10'
-        ,url: '/upload/'
-        ,field:"url"
+        ,url: '/upload'
+        ,field:"myfile"
         ,exts: 'xls|xlsx' //只允许上传Excel文件
         ,done: function(res, index, upload){
             if(res.code==200){
@@ -141,11 +141,14 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
             }
         }
     })
-    form.on("submit(addNews)",function(data){
+    form.on("submit(addNews)",function(datalayui){
         //截取文章内容中的一部分文字放入文章摘要
         //var abstract = layedit.getText(editIndex).substring(0,50);
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
+
+
+
         //获得穿梭框右侧数据
         var classid = transfer.getData('classid');
         var ids=[];
@@ -153,13 +156,19 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         for(var i=0;i<classid.length;i++){
             ids.push({"id":classid[i].value});
         }
+        //删除文件name属性
+        delete datalayui.field.myfile;
 
-        delete data.field.myfile;
+        //获取登录用户信息
+        datalayui.field.author={id:sessionStorage.getItem("uid")};
 
+
+        //添加考试试题
+        //JSON.stringify把json对象转换成字符串
         $.ajax({
             url:"/addMenu",
             type: 'post',//提交请求的类型
-            data:JSON.stringify({"menu":data.field,"classesList":ids}),//数据
+            data:JSON.stringify({"menu":datalayui.field,"classesList":ids}),//数据
             dataType: 'json',//提交后台参数的类型
             contentType:"application/json",//定义数据格式是json
             success:function (data){
@@ -174,7 +183,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
 
         setTimeout(function(){
             top.layer.close(index);
-            top.layer.msg("文章添加成功！");
+            top.layer.msg("试题添加成功！");
             layer.closeAll("iframe");
             //刷新父页面
             parent.location.reload();

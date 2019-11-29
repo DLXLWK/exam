@@ -33,13 +33,18 @@ public class MenuController {
         this.menuServer = menuServer;
     }
 
-
     @ResponseBody
     @RequestMapping("/addMenu")
     public String addMenu(@RequestBody ClassmenuVO classmenu)throws Exception{
+        //判断当前试题是否置顶
+        if(classmenu.getMenu().getIstop()!=1){
+            classmenu.getMenu().setIstop(0);
+        }
        int i= menuServer.addMenu(classmenu,lastFile);
 
        if(i>0){
+           lastFile=null;
+
            return "ok";
        }
 
@@ -68,6 +73,17 @@ public class MenuController {
         //返回json
         map.put("msg","ok");
         map.put("code",200);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/queryMenu")
+    public Map<String,Object> queryMenu(){
+
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code","0");
+        map.put("data",menuServer.queryMenu());
+
         return map;
     }
 }

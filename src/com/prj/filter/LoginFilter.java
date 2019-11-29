@@ -22,17 +22,17 @@ public class LoginFilter implements Filter {
 
         String url=((HttpServletRequest) servletRequest).getServletPath();
 
-
+        //设立免检路径
         List<String> urlList=new ArrayList<String>();
 
         urlList.add("/page/login/login.html");
         urlList.add("/login");
-        urlList.add("/code");
         urlList.add(".jpg");
         urlList.add(".png");
         urlList.add(".gif");
         urlList.add(".css");
         urlList.add(".js");
+        urlList.add("/code");
 
         for(String str:urlList){
             //endsWith判断字符串后缀
@@ -42,16 +42,13 @@ public class LoginFilter implements Filter {
             }
         }
 
-
-
         if(session.getAttribute("loginUser")!=null){
-
+            //用户登录成功
             filterChain.doFilter(servletRequest,servletResponse);
         }else{
-
+            //用户没有登录
             ((HttpServletResponse)servletResponse).sendRedirect("/page/login/login.html");
         }
-
     }
 
     @Override
