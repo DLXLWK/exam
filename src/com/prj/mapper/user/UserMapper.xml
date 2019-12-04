@@ -24,4 +24,7 @@
     SELECT u.*  FROM USER u,role r,classes c WHERE u.rid=r.id AND u.typeclass=c.id AND uname=#{uname} AND pwd=#{pwd}
     </select>
 
+    <insert id="addUser" parameterType="User">
+        insert into user(uname,pwd,typeclass,rid) values(#{uname},#{pwd},#{classes.id},#{role.id});
+    </insert>
 </mapper>

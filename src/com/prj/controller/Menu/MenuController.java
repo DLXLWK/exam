@@ -6,10 +6,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,17 +30,22 @@ public class MenuController {
         this.menuServer = menuServer;
     }
 
-
     @ResponseBody
     @RequestMapping("/addMenu")
     public String addMenu(@RequestBody ClassmenuVO classmenu)throws Exception{
-       int i= menuServer.addMenu(classmenu,lastFile);
+        //判断当前试题是否置顶
+        if(classmenu.getMenu().getIstop()!=1){
+            classmenu.getMenu().setIstop(0);
+        }
+        int i= menuServer.addMenu(classmenu,lastFile);
 
-       if(i>0){
-           return "ok";
-       }
+        if(i>0){
+            lastFile=null;
 
-       return "error";
+            return "ok";
+        }
+
+        return "error";
     }
 
 
@@ -69,5 +71,31 @@ public class MenuController {
         map.put("msg","ok");
         map.put("code",200);
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/queryMenu")
+    public Map<String,Object> queryMenu(){
+
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code","0");
+        map.put("data",menuServer.queryMenu());
+
+        return map;
+    }
+
+    @RequestMapping("/updateIsTop/{id}/{istop}")
+    public String updateIsTop(@PathVariable long id, @PathVariable int istop){
+
+        //用户修改是否置顶
+        if(istop==0){
+            istop=1;
+        }else {
+            istop=0;
+        }
+
+        menuServer.updateIsTop(id,istop);
+
+        return "err";
     }
 }

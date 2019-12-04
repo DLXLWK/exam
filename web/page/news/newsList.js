@@ -9,52 +9,72 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     //新闻列表
     var tableIns = table.render({
         elem: '#newsList',
-        url : '../../json/newsList.json',
+        url : '/queryMenu',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
         limit : 20,
         limits : [10,15,20,25],
-        id : "newsListTable",
+        /* id : "newsListTable",*/
         cols : [[
-            {type: "checkbox", fixed:"left", width:50},
-            {field: 'newsId', title: 'ID', width:60, align:"center"},
-            {field: 'newsName', title: '试题名称', width:350},
-            {field: 'newsAuthor', title: '发布者', align:'center'},
-            {field: 'newsStatus', title: '发布状态',  align:'center',templet:"#newsStatus"},
-            {field: 'newsLook', title: '浏览权限', align:'center'},
-            {field: 'newsTop', title: '是否置顶', align:'center', templet:function(d){
-                    return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否" '+d.newsTop+'>'
+            {type: "checkbox", fixed:"left", width:80},
+            {field: 'id', title: 'ID', width:200, align:"center"},
+            {field: 'title', title: '试题名称', width:180},
+            {field: 'author', title: '发布者',width:200, align:'center', templet:function(d){
+                    return d.author.uname;
                 }},
-            {field: 'newsTime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
-                    return d.newsTime.substring(0,10);
+            {field: 'ispublic', title: '发布状态', width:180, align:'center', templet:function(d){
+                    var str="私密浏览";
+                    if(d==1){
+                        str="公开浏览"
+                    }
+
+                    return str;
                 }},
-            {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
+
+            {field: 'istop', title: '是否置顶',width:120, align:'center', templet:function(d){
+
+                    if(d.istop==1){
+                        return '<input type="checkbox"  lay-filter="newsTop" lay-skin="switch" lay-text="是|否" checked>'
+                    }else {
+                        return '<input type="checkbox"  lay-filter="newsTop" lay-skin="switch" lay-text="是|否">'
+                    }
+                }},
+            {field: 'opentime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
+                    var date=new Date(d.opentime);
+                    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes();
+                }},
+            {title: '操作', width:230, templet:'#newsListBar',fixed:"right",align:"center"}
         ]]
     });
 
     //是否置顶
-    form.on('switch(newsTop)', function(data){
+    table.on('row', function(obj){
+        var data = obj.data;
         var index = layer.msg('修改中，请稍候',{icon: 16,time:false,shade:0.8});
         setTimeout(function(){
             layer.close(index);
-            if(data.elem.checked){
-                layer.msg("置顶成功！");
-            }else{
-                layer.msg("取消置顶成功！");
-            }
+            $.ajax({
+                url:"/updateIsTop/"+data.id+"/"+data.istop,
+                success:function (data){
+                    if(data=="ok"){
+                        layer.msg("修改成功！");
+                    }else{
+                        layer.msg("修改失败！");
+                    }
+                }
+            })
         },500);
     })
 
-    //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
     $(".search_btn").on("click",function(){
         if($(".searchVal").val() != ''){
             table.reload("newsListTable",{
                 page: {
-                    curr: 1 //重新从第 1 页开始
+                    curr: 1
                 },
                 where: {
-                    key: $(".searchVal").val()  //搜索的关键字
+                    key: $(".searchVal").val()
                 }
             })
         }else{
@@ -88,7 +108,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             }
         })
         layui.layer.full(index);
-        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+
         $(window).on("resize",function(){
             layui.layer.full(index);
         })
