@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,10 @@ public class MenuServerImpl implements MenuServer{
         this.menuMapper = menuMapper;
     }
 
+    @Override
+    public int updateTimerIsPublic(long mid) {
+        return menuMapper.updateTimerIsPublic(mid);
+    }
 
     @Override
     public int addMenu(ClassmenuVO classmenu, File file) throws Exception {
@@ -47,8 +52,27 @@ public class MenuServerImpl implements MenuServer{
         long mid=System.currentTimeMillis();
 
         classmenu.getMenu().setId(mid);
+
+        Menu menux=classmenu.getMenu();
+
+        //判断是否是定时发布
+        if(menux.getIspublic()==0){
+            //把字符串转换成java.sql.Timestamp
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            java.util.Date date = null;
+            try {
+                date = sf.parse(classmenu.getMytime());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            java.sql.Timestamp dateSQL = new java.sql.Timestamp(date.getTime());
+
+            menux.setOpentime(dateSQL);
+        }
+
+
         //添加科目
-        int i=menuMapper.addMenu(classmenu.getMenu());
+        int i=menuMapper.addMenu(menux);
 
         if(i>0){
             //科目表添加成功,获得多个班级
@@ -147,12 +171,19 @@ public class MenuServerImpl implements MenuServer{
     }
 
     @Override
-    public List<Menu> queryMenu() {
-        return menuMapper.queryMenu();
+    public List<Menu> queryMenu(String title) {
+        return menuMapper.queryMenu(title);
     }
 
     @Override
     public int updateIsTop(long id, int istop) {
         return menuMapper.updateIsTop(id,istop);
     }
+
+    @Override
+    public int delMenu(Long[] ids) {
+        return menuMapper.delMenu(ids);
+    }
+
+
 }

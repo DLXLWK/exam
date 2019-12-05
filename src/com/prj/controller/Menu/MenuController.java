@@ -11,8 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class MenuController {
@@ -33,6 +33,39 @@ public class MenuController {
     @ResponseBody
     @RequestMapping("/addMenu")
     public String addMenu(@RequestBody ClassmenuVO classmenu)throws Exception{
+        int sum=0;//考试总分钟
+        //考试时间转换成分钟
+        if(classmenu.getScoreTime()!=null){
+            String scoreTime=classmenu.getScoreTime();
+
+            //小时
+            int xiaoshi=Integer.parseInt(scoreTime.substring(0,scoreTime.indexOf(":")));
+            int fenzhong=Integer.parseInt(scoreTime.substring(scoreTime.indexOf(":")+1,scoreTime.length()));
+
+            sum=fenzhong+xiaoshi*60;
+
+        }
+
+        classmenu.getMenu().setScoreTime(sum);
+        //判断试题是否是定时发布
+        if(classmenu.getMenu().getIspublic()==0){
+            //获取用户的定时时间
+            String mytime=classmenu.getMytime();
+            //把字符串转换成date对象
+            SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            //时间对象
+            Date date= dateFormat.parse(mytime);
+            //启动定时任务
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    //获取试题ID
+                    long mid=classmenu.getMenu().getId();
+                    menuServer.updateTimerIsPublic(mid);
+                }
+            },date);
+        }
+
         //判断当前试题是否置顶
         if(classmenu.getMenu().getIstop()!=1){
             classmenu.getMenu().setIstop(0);
@@ -75,11 +108,11 @@ public class MenuController {
 
     @ResponseBody
     @RequestMapping("/queryMenu")
-    public Map<String,Object> queryMenu(){
+    public Map<String,Object> queryMenu(String title,int page,int limit){
 
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("code","0");
-        map.put("data",menuServer.queryMenu());
+        map.put("data",menuServer.queryMenu(title));
 
         return map;
     }
@@ -97,5 +130,15 @@ public class MenuController {
         menuServer.updateIsTop(id,istop);
 
         return "err";
+    }
+
+    //批量删除试题
+    @ResponseBody
+    @RequestMapping("/delMenu")
+    public String delMenu(@RequestParam() Long[] ids){
+
+        menuServer.delMenu(ids);
+
+        return "ok";
     }
 }

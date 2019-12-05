@@ -89,26 +89,35 @@
 		<blockquote class="layui-elem-quote title magt10"><i class="layui-icon">&#xe609;</i> 发布</blockquote>
 		<div class="border">
 			<div class="layui-form-item">
-				<label class="layui-form-label"><i class="layui-icon">&#xe60e;</i> 状　态</label>
+				<label class="layui-form-label"><i class="layui-icon">&#xe60e;</i> 总  分</label>
 				<div class="layui-input-block newsStatus">
-					<select  lay-verify="required">
-						<option value="0">保存草稿</option>
-						<option value="1">正常使用</option>
+					<select name="sumScore" lay-verify="required">
+						<option value="150">150</option>
+						<option value="120">120</option>
+						<option value="100">100</option>
+						<option value="10">10</option>
 					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i class="layui-icon">&#xe60e;</i> 总时间</label>
+				<div class="layui-input-block newsStatus">
+					<input type="text" class="layui-input" id="test4"  placeholder="HH:mm">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label"><i class="layui-icon">&#xe609;</i> 发　布</label>
 				<div class="layui-input-block">
-					<input type="radio"  title="立即发布" lay-skin="primary" lay-filter="release" checked />
-					<input type="radio"  title="定时发布" lay-skin="primary" lay-filter="release" />
+					<!--<input type="radio"   title="立即发布" lay-skin="primary" lay-filter="release" checked />
+					<input type="radio"  title="定时发布" lay-skin="primary" lay-filter="release" />-->
+					<input type="radio"  name="ispublic" value="1"  title="立即发布" lay-skin="primary" lay-filter="release" checked />
+					<input type="radio"  name="ispublic"  value="0" title="定时发布" lay-skin="primary" lay-filter="release" />
 				</div>
 			</div>
 			<div class="layui-form-item layui-hide releaseDate">
 				<label class="layui-form-label"></label>
 				<div class="layui-input-block">
-					<input type="text" class="layui-input" id="release" placeholder="请选择日期和时间" readonly />
-				</div>
+					<input type="text" class="layui-input" id="release"  placeholder="请选择日期和时间" readonly />				</div>
 			</div>
 			<div class="layui-form-item openness">
 				<label class="layui-form-label"><i class="seraph icon-look"></i> 公开度</label>

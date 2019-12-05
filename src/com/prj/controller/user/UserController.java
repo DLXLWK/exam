@@ -46,6 +46,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/login")
     public String login(User user, HttpSession session, String yzm ){
+        user.setPwd(string2MD5(user.getPwd()));
         User login= userServer.login(user);
         if (login!=null && yzm.equals(strCode)){
             session.setAttribute("loginUser",login);
@@ -133,8 +134,9 @@ public class UserController {
         return "ok";
     }
 
-
-     /* MD5加码 生成32位md5码*/
+    /***
+     * MD5加码 生成32位md5码
+     */
 
     public static String string2MD5(String inStr){
         try {

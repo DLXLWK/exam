@@ -16,8 +16,11 @@ public interface MenuServer {
     //添加科目表与班级表中间表
     public int addMenuClasses(Classmenu classesmenu);
     //查询考试科目
-    public List<Menu> queryMenu();
+    public List<Menu> queryMenu(String title);
     //修改置顶
     public int updateIsTop(long id,int istop);
-
+    //批量删除
+    public int delMenu(Long[] ids);
+    //定时任务修改发布状态
+    public int updateTimerIsPublic(long mid);
 }

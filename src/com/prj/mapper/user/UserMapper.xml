@@ -21,10 +21,11 @@
     </resultMap>
 
     <select id="login"  resultMap="userMap" parameterType="User">
-    SELECT u.*  FROM USER u,role r,classes c WHERE u.rid=r.id AND u.typeclass=c.id AND uname=#{uname} AND pwd=#{pwd}
-    </select>
+    SELECT u.*,r.id rid,c.id cid,r.rname,c.classesName FROM `user` u,role r,classes c WHERE u.rid=r.id AND c.id=u.typeclass AND  uname=#{uname} AND pwd=#{pwd}
+</select>
 
     <insert id="addUser" parameterType="User">
         insert into user(uname,pwd,typeclass,rid) values(#{uname},#{pwd},#{classes.id},#{role.id});
     </insert>
+
 </mapper>
