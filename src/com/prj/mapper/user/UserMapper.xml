@@ -10,12 +10,12 @@
         <association property="classes" resultMap="ClassMap" javaType="Classes"></association>
     </resultMap>
     <resultMap id="roleMap" type="Role">
-        <id column="id" property="id"></id>
+        <id column="rid" property="id"></id>
         <result column="rname" property="rname"></result>
 
     </resultMap>
     <resultMap id="ClassMap" type="Classes">
-        <id column="id" property="id"></id>
+        <id column="cid" property="id"></id>
         <result column="classesName" property="classesName"></result>
 
     </resultMap>
