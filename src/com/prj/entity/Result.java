@@ -4,11 +4,11 @@ package com.prj.entity;
 public class Result {
 
   private int id;
-  private int uid;
+  private User user;
   private String title;
   private int result;
   private String time;
-  private int mid;
+  private Menu menu;
   private String info;
 
 
@@ -19,16 +19,6 @@ public class Result {
   public void setId(int id) {
     this.id = id;
   }
-
-
-  public int getUid() {
-    return uid;
-  }
-
-  public void setUid(int uid) {
-    this.uid = uid;
-  }
-
 
   public String getTitle() {
     return title;
@@ -56,16 +46,6 @@ public class Result {
     this.time = time;
   }
 
-
-  public int getMid() {
-    return mid;
-  }
-
-  public void setMid(int mid) {
-    this.mid = mid;
-  }
-
-
   public String getInfo() {
     return info;
   }
@@ -74,4 +54,19 @@ public class Result {
     this.info = info;
   }
 
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Menu getMenu() {
+    return menu;
+  }
+
+  public void setMenu(Menu menu) {
+    this.menu = menu;
+  }
 }

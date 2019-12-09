@@ -1,6 +1,8 @@
 package com.prj.controller.Menu;
 
 import com.prj.entity.ClassmenuVO;
+import com.prj.entity.Menu;
+import com.prj.entity.ResultVO;
 import com.prj.server.menu.MenuServer;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,4 +143,28 @@ public class MenuController {
 
         return "ok";
     }
+
+
+    //加载登录人的考试列表
+    @ResponseBody
+    @RequestMapping("/loadExam/{id}")
+    public List<Menu> loadExam(@PathVariable int id){
+
+        List<Menu> menuList= menuServer.loadMenu(id);
+
+        return menuList;
+    }
+
+    //交卷
+    @ResponseBody
+    @RequestMapping("/submitExam")
+    public String submitExam(@RequestBody ResultVO resultVO){
+
+        System.out.println(resultVO);
+
+
+        return "ok";
+    }
+
+
 }

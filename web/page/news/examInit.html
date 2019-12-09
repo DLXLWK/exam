@@ -37,7 +37,7 @@
 					<td pc>
 						<label class="layui-form-label">请选择考试</label>
 						<div class="layui-input-inline">
-							<select name="modules" lay-verify="required" lay-search="">
+							<select id="mids" name="modules" lay-verify="required" lay-search="">
 								<option value="1">java基础</option>
 								<option value="2">循环</option>
 								<option value="3">面向对象</option>
@@ -47,50 +47,21 @@
 		    	</tr>
 		    	<tr>
 		    		<td>考试时间</td>
-		    		<td pc>90分钟</td>
-		    	</tr>
+					<td id="scoreTime" pc></td>
+				</tr>
 		    	<tr>
 		    		<td>总分</td>
-		    		<td pc>100</td>
+					<td id="sumScore" pc></td>
 		    	</tr>
 		    	<tr>
 					<td>班级</td>
-					<td id="classesName" pc>12345678912345678x</td>
+					<td id="classesName" pc></td>
 		    	</tr>
 		    	<tr>
 					<td>姓名</td>
 					<td id="myname" pc></td>
 		    	</tr>
-		    	<!--<tr>
-		    		<td>最大上传限制</td>
-		    		<td><input type="text" class="layui-input maxUpload" placeholder="请输入最大上传限制"></td>
-		    		<td pc>maxUpload</td>
-		    	</tr>
-		    	<tr>
-		    		<td>用户权限</td>
-		    		<td><input type="text" class="layui-input userRights" placeholder="请输入当前用户权限"></td>
-		    		<td pc>userRights</td>
-		    	</tr>
-		    	<tr>
-		    		<td>默认关键字</td>
-		    		<td><input type="text" class="layui-input keywords" placeholder="请输入默认关键字"></td>
-		    		<td pc>keywords</td>
-		    	</tr>
-		    	<tr>
-		    		<td>版权信息</td>
-		    		<td><input type="text" class="layui-input powerby" placeholder="请输入网站版权信息"></td>
-		    		<td pc>powerby</td>
-		    	</tr>
-		    	<tr>
-		    		<td>网站描述</td>
-		    		<td><textarea placeholder="请输入网站描述" class="layui-textarea description"></textarea></td>
-		    		<td pc>description</td>
-		    	</tr>
-		    	<tr>
-		    		<td>网站备案号</td>
-		    		<td><input type="text" class="layui-input record" placeholder="请输入网站备案号"></td>
-		    		<td pc>record</td>
-		    	</tr>-->
+
 		    </tbody>
 		</table>
 		<div class="magt10 layui-center">

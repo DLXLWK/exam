@@ -2,6 +2,7 @@ package com.prj.mapper.menu;
 
 import com.prj.entity.Classmenu;
 import com.prj.entity.Menu;
+import com.prj.entity.Result;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,4 +20,8 @@ public interface MenuMapper {
     public int delMenu(@Param("ids") Long[] ids);
     //定时任务修改发布状态
     public int updateTimerIsPublic(@Param("mid")long mid);
+    //加载登录人考试列表
+    public List<Menu> loadMenu(@Param("id") int id);
+    //交卷
+    public int insertResult(Result result);
 }

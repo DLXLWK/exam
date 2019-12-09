@@ -184,6 +184,14 @@ public class MenuServerImpl implements MenuServer{
     public int delMenu(Long[] ids) {
         return menuMapper.delMenu(ids);
     }
+    @Override
+    public List<Menu> loadMenu(int id) {
+        return menuMapper.loadMenu(id);
+    }
 
+    @Override
+    public int insertResult(Result result) {
+        return menuMapper.insertResult(result);
+    }
 
 }

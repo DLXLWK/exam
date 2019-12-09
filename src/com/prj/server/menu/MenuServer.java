@@ -3,6 +3,7 @@ package com.prj.server.menu;
 import com.prj.entity.Classmenu;
 import com.prj.entity.ClassmenuVO;
 import com.prj.entity.Menu;
+import com.prj.entity.Result;
 import org.apache.ibatis.annotations.Param;
 
 import java.io.File;
@@ -23,4 +24,8 @@ public interface MenuServer {
     public int delMenu(Long[] ids);
     //定时任务修改发布状态
     public int updateTimerIsPublic(long mid);
+    //加载登录人考试列表
+    public List<Menu> loadMenu(int id);
+    //交卷
+    public int insertResult(Result result);
 }

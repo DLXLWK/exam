@@ -10,6 +10,8 @@
         <result column="ispublic" property="ispublic"></result>
         <result column="istop" property="istop"></result>
         <result column="opentime" property="opentime"></result>
+        <result column="scoreTime" property="scoreTime"></result>
+        <result column="sumScore" property="sumScore"></result>
         <association property="author" resultMap="userMap" javaType="Integer"></association>
     </resultMap>
 
@@ -54,7 +56,19 @@
             #{i}
         </foreach>
     </delete>
+    <select id="loadMenu" resultMap="menuMap">
 
+        SELECT m.* FROM USER u,classes c,classmenu cm,menu m
+         WHERE u.typeclass=c.id
+         AND c.id=cm.classid
+         AND m.id=cm.menuid
+         AND m.ispublic=1
+         AND u.id=#{id}
+
+    </select>
+    <insert id="insertResult" parameterType="Result">
+        INSERT INTO(uid,result,TIME,MID,info) VALUES(#{user.id},#{result},#{time},#{menu.id},#{info})
+    </insert>
     <!--定时任务修改发布状态-->
     <update id="updateTimerIsPublic">
         update menu set ispublic=1 where id=#{mid}
